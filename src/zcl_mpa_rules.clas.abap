@@ -4,15 +4,18 @@ CLASS zcl_mpa_rules DEFINITION
   CREATE PUBLIC.
 
   PUBLIC SECTION.
+    TYPES ty_status   TYPE c LENGTH 1.
+    TYPES ty_priority TYPE c LENGTH 1.
+
     " Pure educational business-rule model; no database dependencies.
     CLASS-METHODS can_start
-      IMPORTING iv_status TYPE c LENGTH 1
+      IMPORTING iv_status TYPE ty_status
       RETURNING VALUE(rv_allowed) TYPE abap_bool.
     CLASS-METHODS can_close
-      IMPORTING iv_status TYPE c LENGTH 1
+      IMPORTING iv_status TYPE ty_status
       RETURNING VALUE(rv_allowed) TYPE abap_bool.
     CLASS-METHODS valid_priority
-      IMPORTING iv_priority TYPE c LENGTH 1
+      IMPORTING iv_priority TYPE ty_priority
       RETURNING VALUE(rv_valid) TYPE abap_bool.
     CLASS-METHODS valid_title
       IMPORTING iv_title TYPE string
