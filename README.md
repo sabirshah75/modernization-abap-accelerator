@@ -6,11 +6,11 @@ This repository contains SAP ABAP Cloud starter classes that can be imported thr
 
 ## Documentation — recommended reading order
 
-1. [RAP implementation walkthrough](docs/RAP-IMPLEMENTATION.md) — confirmed milestones, architecture, root BDEF reference, safe implementation sequence, validations, defaults, status actions and test plan.
-2. [Source explained statement by statement](docs/SOURCE-LINE-BY-LINE.md) — detailed rationale for class definitions, interfaces, methods, logic, assertions and tests.
-3. [EML guide](docs/EML-GUIDE.md) — `READ ENTITIES`, `MODIFY ENTITIES`, CREATE/UPDATE/DELETE/EXECUTE, `MAPPED`, `FAILED`, `REPORTED`, `%cid`, `%tky`, `%control`, draft, `IN LOCAL MODE`, `COMMIT ENTITIES`, tests and pitfalls.
+1. [RAP handler candidate explained line by line](docs/RAP-HANDLER-LINE-BY-LINE.md) — complete proposed local handler and root BDEF; **not yet activated** and must be reconciled with ADT Local Types.\n2. [RAP implementation walkthrough](docs/RAP-IMPLEMENTATION.md) — confirmed milestones, architecture, root BDEF reference, safe implementation sequence, validations, defaults, status actions and test plan.
+3. [Source explained statement by statement](docs/SOURCE-LINE-BY-LINE.md) — detailed rationale for class definitions, interfaces, methods, logic, assertions and tests.
+4. [EML guide](docs/EML-GUIDE.md) — `READ ENTITIES`, `MODIFY ENTITIES`, CREATE/UPDATE/DELETE/EXECUTE, `MAPPED`, `FAILED`, `REPORTED`, `%cid`, `%tky`, `%control`, draft, `IN LOCAL MODE`, `COMMIT ENTITIES`, tests and pitfalls.
 
-## Import contents
+5. [Behavior pool anatomy](docs/BEHAVIOR-POOL-ANATOMY.md) — why the generated global class is empty and where to implement local RAP handlers.\n\n## Proposed RAP integration files (review-only)\n\n- [Root behavior definition candidate](integration/adt/zzmpr_servicerequest01.bdef.asbdef) — includes draft, defaults, validations, actions, and supplied mappings.\n- [Behavior pool local handler candidate](integration/adt/zzmpbp_r_servicerequest01.locals_imp.abap) — class declaration plus implementation for defaults, validation, Start/Close, and trial-only authorization.\n- Both are intentionally under `integration/adt/` and **outside** abapGit import root `src/`. This prevents an untested reconstructed handler from being imported over the live SAP application. It is not yet a complete runnable RAP repository: generated projection CDS/BDEF, base CDS, table metadata, value help, services, and real tenant Local Types remain to be exported.\n\n## Import contents
 
 - `ZCL_MPA_HELLO`: console smoke-test class.
 - `ZCL_MPA_RULES`: pure educational business-rule methods for status transitions, validation and defaults.
