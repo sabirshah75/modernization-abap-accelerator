@@ -1,0 +1,11 @@
+@EndUserText: {
+  label: 'Service Definition for ZZMPC_SERVICEREQUEST01'
+}
+@ObjectModel: {
+  leadingEntity: {
+    name: 'ZZMPC_SERVICEREQUEST01'
+  }
+}
+define service ZZMPUI_SERVICEREQUEST_O401 provider contracts odata_v4_ui {
+  expose ZZMPC_SERVICEREQUEST01 as ServiceRequest;
+}

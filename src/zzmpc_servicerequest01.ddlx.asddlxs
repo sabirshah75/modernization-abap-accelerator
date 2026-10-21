@@ -1,0 +1,167 @@
+@Metadata.layer: #CORE
+@UI.headerInfo.title.type: #STANDARD
+@UI.headerInfo.title.value: 'UUID'
+@UI.headerInfo.description.type: #STANDARD
+@UI.headerInfo.description.value: 'UUID'
+annotate view ZZMPC_SERVICEREQUEST01 with
+{
+  @UI.facet: [ {
+    label: 'General Information', 
+    id: 'GeneralInfo', 
+    purpose: #STANDARD, 
+    position: 10 , 
+    type: #IDENTIFICATION_REFERENCE
+  } ]
+  @EndUserText.label: 'UUID'
+  @UI.identification: [ {
+    position: 10 , 
+    label: 'UUID'
+  } ]
+  @UI.lineItem: [ {
+    position: 10 , 
+    label: 'UUID'
+  } ]
+  @UI.selectionField: [ {
+    position: 10 
+  } ]
+  UUID;
+  
+  @EndUserText.label: 'Title'
+  @UI.identification: [ {
+    position: 20 , 
+    label: 'Title'
+  } ]
+  @UI.lineItem: [ {
+    position: 20 , 
+    label: 'Title'
+  } ]
+  @UI.selectionField: [ {
+    position: 20 
+  } ]
+  Title;
+  
+  @EndUserText.label: 'Description'
+  @UI.identification: [ {
+    position: 30 , 
+    label: 'Description'
+  } ]
+  @UI.lineItem: [ {
+    position: 30 , 
+    label: 'Description'
+  } ]
+  @UI.selectionField: [ {
+    position: 30 
+  } ]
+  Description;
+  
+  @EndUserText.label: 'Priority'
+  @UI.identification: [ {
+    position: 40 , 
+    label: 'Priority'
+  } ]
+  @UI.lineItem: [ {
+    position: 40 , 
+    label: 'Priority'
+  } ]
+  @UI.selectionField: [ {
+    position: 40 
+  } ]
+  Priority;
+  
+  @EndUserText.label: 'Status'
+  @UI.identification: [ {
+    position: 50 , 
+    label: 'Status'
+  } ]
+  @UI.lineItem: [ {
+    position: 50 , 
+    label: 'Status'
+  } ]
+  @UI.selectionField: [ {
+    position: 50 
+  } ]
+  Status;
+  
+  @EndUserText.label: 'CreatedBy'
+  @UI.identification: [ {
+    position: 60 , 
+    label: 'CreatedBy'
+  } ]
+  @UI.lineItem: [ {
+    position: 60 , 
+    label: 'CreatedBy'
+  } ]
+  @UI.selectionField: [ {
+    position: 60 
+  } ]
+  CreatedBy;
+  
+  @EndUserText.label: 'CreatedAt'
+  @UI.identification: [ {
+    position: 70 , 
+    label: 'CreatedAt'
+  } ]
+  @UI.lineItem: [ {
+    position: 70 , 
+    label: 'CreatedAt'
+  } ]
+  @UI.selectionField: [ {
+    position: 70 
+  } ]
+  CreatedAt;
+  
+  @UI.identification: [ {
+    position: 80 
+  } ]
+  @UI.lineItem: [ {
+    position: 80 
+  } ]
+  @UI.selectionField: [ {
+    position: 80 
+  } ]
+  LocalCreatedBy;
+  
+  @UI.identification: [ {
+    position: 90 
+  } ]
+  @UI.lineItem: [ {
+    position: 90 
+  } ]
+  @UI.selectionField: [ {
+    position: 90 
+  } ]
+  LocalCreatedAt;
+  
+  @UI.identification: [ {
+    position: 100 
+  } ]
+  @UI.lineItem: [ {
+    position: 100 
+  } ]
+  @UI.selectionField: [ {
+    position: 100 
+  } ]
+  LocalLastChangedBy;
+  
+  @UI.identification: [ {
+    position: 110 
+  } ]
+  @UI.lineItem: [ {
+    position: 110 
+  } ]
+  @UI.selectionField: [ {
+    position: 110 
+  } ]
+  LocalLastChangedAt;
+  
+  @UI.identification: [ {
+    position: 120 
+  } ]
+  @UI.lineItem: [ {
+    position: 120 
+  } ]
+  @UI.selectionField: [ {
+    position: 120 
+  } ]
+  LastChangedAt;
+}

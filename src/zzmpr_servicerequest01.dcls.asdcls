@@ -1,0 +1,6 @@
+@EndUserText.label: 'ZZMPR_SERVICEREQUEST01'
+@MappingRole: true
+define role ZZMPR_SERVICEREQUEST01 {
+  grant select on ZZMPR_SERVICEREQUEST01
+  where TRUE;
+}
