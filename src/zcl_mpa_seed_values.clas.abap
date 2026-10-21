@@ -5,18 +5,25 @@ ENDCLASS.
 
 CLASS zcl_mpa_seed_values IMPLEMENTATION.
   METHOD if_oo_adt_classrun~main.
-    MODIFY zmpa_priority FROM TABLE @( VALUE #(
+    DATA priorities TYPE STANDARD TABLE OF zmpa_priority WITH EMPTY KEY.
+    DATA statuses   TYPE STANDARD TABLE OF zmpa_status WITH EMPTY KEY.
+
+    priorities = VALUE #(
       ( client = sy-mandt priority = 'H' priority_text = 'High' )
       ( client = sy-mandt priority = 'M' priority_text = 'Medium' )
-      ( client = sy-mandt priority = 'L' priority_text = 'Low' ) ) ).
-    DATA(lv_priorities) = sy-dbcnt.
+      ( client = sy-mandt priority = 'L' priority_text = 'Low' ) ).
 
-    MODIFY zmpa_status FROM TABLE @( VALUE #(
+    statuses = VALUE #(
       ( client = sy-mandt status = 'O' status_text = 'Open' )
       ( client = sy-mandt status = 'I' status_text = 'In Progress' )
-      ( client = sy-mandt status = 'C' status_text = 'Closed' ) ) ).
-    DATA(lv_statuses) = sy-dbcnt.
-    out->write( |Priority rows affected: { lv_priorities }| ).
-    out->write( |Status rows affected: { lv_statuses }| ).
+      ( client = sy-mandt status = 'C' status_text = 'Closed' ) ).
+
+    MODIFY zmpa_priority FROM TABLE @priorities.
+    DATA(priority_count) = sy-dbcnt.
+    MODIFY zmpa_status FROM TABLE @statuses.
+    DATA(status_count) = sy-dbcnt.
+
+    out->write( |Priority rows affected: { priority_count }| ).
+    out->write( |Status rows affected: { status_count }| ).
   ENDMETHOD.
 ENDCLASS.
