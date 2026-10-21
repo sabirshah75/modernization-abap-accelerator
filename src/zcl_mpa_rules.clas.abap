@@ -17,9 +17,16 @@ CLASS zcl_mpa_rules DEFINITION
     CLASS-METHODS valid_priority
       IMPORTING iv_priority TYPE ty_priority
       RETURNING VALUE(rv_valid) TYPE abap_bool.
+    CLASS-METHODS valid_status
+      IMPORTING iv_status TYPE ty_status
+      RETURNING VALUE(rv_valid) TYPE abap_bool.
     CLASS-METHODS valid_title
       IMPORTING iv_title TYPE string
       RETURNING VALUE(rv_valid) TYPE abap_bool.
+    CLASS-METHODS default_priority
+      RETURNING VALUE(rv_priority) TYPE ty_priority.
+    CLASS-METHODS default_status
+      RETURNING VALUE(rv_status) TYPE ty_status.
 ENDCLASS.
 
 CLASS zcl_mpa_rules IMPLEMENTATION.
@@ -33,8 +40,18 @@ CLASS zcl_mpa_rules IMPLEMENTATION.
     rv_valid = xsdbool(
       iv_priority = 'L' OR iv_priority = 'M' OR iv_priority = 'H' ).
   ENDMETHOD.
+  METHOD valid_status.
+    rv_valid = xsdbool(
+      iv_status = 'O' OR iv_status = 'I' OR iv_status = 'C' ).
+  ENDMETHOD.
   METHOD valid_title.
     rv_valid = xsdbool( iv_title IS NOT INITIAL AND
                            strlen( iv_title ) <= 80 ).
+  ENDMETHOD.
+  METHOD default_priority.
+    rv_priority = 'M'.
+  ENDMETHOD.
+  METHOD default_status.
+    rv_status = 'O'.
   ENDMETHOD.
 ENDCLASS.
