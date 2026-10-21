@@ -1,0 +1,37 @@
+CLASS zcl_mpa_rules DEFINITION
+  PUBLIC
+  FINAL
+  CREATE PUBLIC.
+
+  PUBLIC SECTION.
+    " Pure educational business-rule model; no database dependencies.
+    CLASS-METHODS can_start
+      IMPORTING iv_status TYPE c LENGTH 1
+      RETURNING VALUE(rv_allowed) TYPE abap_bool.
+    CLASS-METHODS can_close
+      IMPORTING iv_status TYPE c LENGTH 1
+      RETURNING VALUE(rv_allowed) TYPE abap_bool.
+    CLASS-METHODS valid_priority
+      IMPORTING iv_priority TYPE c LENGTH 1
+      RETURNING VALUE(rv_valid) TYPE abap_bool.
+    CLASS-METHODS valid_title
+      IMPORTING iv_title TYPE string
+      RETURNING VALUE(rv_valid) TYPE abap_bool.
+ENDCLASS.
+
+CLASS zcl_mpa_rules IMPLEMENTATION.
+  METHOD can_start.
+    rv_allowed = xsdbool( iv_status = 'O' ).
+  ENDMETHOD.
+  METHOD can_close.
+    rv_allowed = xsdbool( iv_status = 'I' ).
+  ENDMETHOD.
+  METHOD valid_priority.
+    rv_valid = xsdbool(
+      iv_priority = 'L' OR iv_priority = 'M' OR iv_priority = 'H' ).
+  ENDMETHOD.
+  METHOD valid_title.
+    rv_valid = xsdbool( iv_title IS NOT INITIAL AND
+                           strlen( iv_title ) <= 80 ).
+  ENDMETHOD.
+ENDCLASS.
