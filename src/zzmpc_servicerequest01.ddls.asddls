@@ -15,7 +15,9 @@ define root view entity ZZMPC_SERVICEREQUEST01
   key UUID,
   Title,
   Description,
+  @Consumption.valueHelpDefinition: [{ entity: { name: 'ZI_MPA_PRIORITY_VH', element: 'Priority' } }]
   Priority,
+  @Consumption.valueHelpDefinition: [{ entity: { name: 'ZI_MPA_STATUS_VH', element: 'Status' } }]
   Status,
   CreatedBy,
   CreatedAt,
