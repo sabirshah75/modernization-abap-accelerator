@@ -1,4 +1,4 @@
-" Tests for the independent reference rule model only; NOT RAP integration tests.
+" ABAP Unit tests for the independent rule model; NOT RAP integration tests.
 CLASS ltc_mpa_rules DEFINITION FINAL FOR TESTING
   DURATION SHORT
   RISK LEVEL HARMLESS.
@@ -16,6 +16,12 @@ CLASS ltc_mpa_rules DEFINITION FINAL FOR TESTING
     METHODS title_present FOR TESTING.
     METHODS title_empty FOR TESTING.
     METHODS title_too_long FOR TESTING.
+    METHODS status_open FOR TESTING.
+    METHODS status_progress FOR TESTING.
+    METHODS status_closed FOR TESTING.
+    METHODS status_unknown FOR TESTING.
+    METHODS default_priority_medium FOR TESTING.
+    METHODS default_status_open FOR TESTING.
 ENDCLASS.
 
 CLASS ltc_mpa_rules IMPLEMENTATION.
@@ -73,5 +79,29 @@ CLASS ltc_mpa_rules IMPLEMENTATION.
     cl_abap_unit_assert=>assert_equals(
       act = zcl_mpa_rules=>valid_title( long_title )
       exp = abap_false ).
+  ENDMETHOD.
+  METHOD status_open.
+    cl_abap_unit_assert=>assert_equals(
+      act = zcl_mpa_rules=>valid_status( 'O' ) exp = abap_true ).
+  ENDMETHOD.
+  METHOD status_progress.
+    cl_abap_unit_assert=>assert_equals(
+      act = zcl_mpa_rules=>valid_status( 'I' ) exp = abap_true ).
+  ENDMETHOD.
+  METHOD status_closed.
+    cl_abap_unit_assert=>assert_equals(
+      act = zcl_mpa_rules=>valid_status( 'C' ) exp = abap_true ).
+  ENDMETHOD.
+  METHOD status_unknown.
+    cl_abap_unit_assert=>assert_equals(
+      act = zcl_mpa_rules=>valid_status( 'X' ) exp = abap_false ).
+  ENDMETHOD.
+  METHOD default_priority_medium.
+    cl_abap_unit_assert=>assert_equals(
+      act = zcl_mpa_rules=>default_priority( ) exp = 'M' ).
+  ENDMETHOD.
+  METHOD default_status_open.
+    cl_abap_unit_assert=>assert_equals(
+      act = zcl_mpa_rules=>default_status( ) exp = 'O' ).
   ENDMETHOD.
 ENDCLASS.

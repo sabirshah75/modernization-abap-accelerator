@@ -1,0 +1,71 @@
+managed implementation in class ZZMPBP_R_SERVICEREQUEST01 unique;
+strict ( 2 );
+with draft;
+extensible;
+
+define behavior for ZZMPR_SERVICEREQUEST01 alias ServiceRequest
+  persistent table ZZMPSRVCRQUEST01
+  extensible
+  draft table ZZMPSRVCRQST_D01
+  etag master LocalLastChangedAt
+  lock master total etag LastChangedAt
+  authorization master ( global )
+{
+  " Framework-managed key and administrative columns must not be edited by users.
+  field ( readonly )
+    UUID,
+    LocalCreatedBy,
+    LocalCreatedAt,
+    LocalLastChangedBy,
+    LocalLastChangedAt,
+    LastChangedAt;
+
+  field ( numbering : managed ) UUID;
+
+  " Status is changed through StartRequest/CloseRequest, not generic edits.
+  field ( readonly ) Status;
+
+  " Fiori can show the mandatory indicator; RAP validation remains authoritative.
+  field ( mandatory ) Title;
+
+  create;
+  update;
+  delete;
+
+  " Apply defaults only when a new request is created.
+  determination SetDefaults on modify { create; }
+
+  " Check all saved active requests and validate drafts before activation.
+  validation ValidateRequest on save { create; update; }
+
+  " Delegate action authorization to the update operation.
+  action ( authorization : update ) StartRequest result [1] $self;
+  action ( authorization : update ) CloseRequest result [1] $self;
+
+  draft action Activate optimized;
+  draft action Discard;
+  draft action Edit;
+  draft action Resume;
+  draft determine action Prepare
+  {
+    validation ValidateRequest;
+  }
+
+  " Preserve existing table mapping. Duplicate CreatedBy/CreatedAt can be
+  " cleaned in UI metadata first; do not drop columns in a live draft app.
+  mapping for ZZMPSRVCRQUEST01 corresponding extensible
+  {
+    UUID               = UUID;
+    Title              = TITLE;
+    Description        = DESCRIPTION;
+    Priority           = PRIORITY;
+    Status             = STATUS;
+    CreatedBy          = CREATED_BY;
+    CreatedAt          = CREATED_AT;
+    LocalCreatedBy     = LOCAL_CREATED_BY;
+    LocalCreatedAt     = LOCAL_CREATED_AT;
+    LocalLastChangedBy = LOCAL_LAST_CHANGED_BY;
+    LocalLastChangedAt = LOCAL_LAST_CHANGED_AT;
+    LastChangedAt      = LAST_CHANGED_AT;
+  }
+}
